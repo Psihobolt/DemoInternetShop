@@ -4,7 +4,10 @@ import { IProduct } from '../interfaces/product';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  host: {
+    style: "display: contents"
+  }
 })
 
 export class ProductComponent {

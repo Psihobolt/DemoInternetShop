@@ -1,17 +1,23 @@
-<div class="container" *ngIf="product">
-    <div class="row">   
-        <div class="col">
-            <img class="img-thumbnail" style="width: 200px; height: 200px;" [src]="product.image" [alt]="product.title" />   
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h2>{{ product.title }}</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            shortkey
+<div class="col-md-4 col-12 p-2" *ngIf="product">
+    <div class="card h-100">
+        <div class="row g-0">
+            <div class="col-md-4 col-4">
+                <div class="p-2">
+                    <img [src]="product.image" class="img-fluid rounded-start" style="min-height: 50px; max-height: 150px;" [alt]="product.title">
+                </div>
+                <div class="mt-auto p-2 text-center">
+                    <span>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <b>{{ product.rating.rate }}</b> ({{ product.rating.count }})
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-8 col-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <button class="btn btn-primary" type="button">Add to Cart</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
