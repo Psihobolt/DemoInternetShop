@@ -1,0 +1,17 @@
+<div class="container" *ngIf="product">
+    <div class="row">   
+        <div class="col">
+            <img class="img-thumbnail" style="width: 200px; height: 200px;" [src]="product.image" [alt]="product.title" />   
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>{{ product.title }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            shortkey
+        </div>
+    </div>
+</div>
