@@ -9,4 +9,4 @@ export interface IProduct {
       count: number;
     }
     price: number;
-  }
+}

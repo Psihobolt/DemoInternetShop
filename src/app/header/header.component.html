@@ -7,13 +7,21 @@
         <div class="collapse navbar-collapse" id="navbarShop">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" routerLink="/products">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Shopping cart</a>
                 </li>
             </ul>
-            <span class="navbar-text ms-auto mb-2 mb-lg-0">TEST</span>
+            <div class="navbar-text ms-auto me-4 mb-2 mb-lg-0">
+                <a routerLink="/cart" class="p-2 position-relative">
+                    <i class="bi bi-bag-fill"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {{ cartCount }}
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
 </nav>

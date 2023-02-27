@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IProduct } from '../interfaces/product';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -12,4 +13,12 @@ import { IProduct } from '../interfaces/product';
 
 export class ProductComponent {
   @Input() product?:IProduct;
+
+  constructor(private cartService: CartService) {}
+
+  buyProduct(product:IProduct){
+    if (product){
+      this.cartService.addToCart(product);
+    }
+  }
 }
