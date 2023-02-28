@@ -1,41 +1,22 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, retry, throwError } from 'rxjs';
-import { ICartItem } from '../interfaces/cart.item';
-import { IProduct } from '../interfaces/product';
+import { Observable, of} from 'rxjs';
+import { ShoppingItem } from '../data/shopping.item';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CartService {
-  private cartUrl:string = 'api/cart/'
+  private items:ShoppingItem[] = [];
+  constructor() { }
 
-  constructor(private http: HttpClient) { }
-
-  getItemsCart(): Observable<ICartItem[]> {
-    return this.http.get<ICartItem[]>(this.cartUrl).pipe(
-      retry(2),
-      catchError((error: HttpErrorResponse) => {
-        console.error(error);
-        return throwError(error);
-      })
-    );
+  getItemsCart(): Observable<ShoppingItem[]> {
+    return of(this.items)
   }
 
-  addToCart(product: IProduct): Observable<ICartItem> {
-    const cartItem:ICartItem = {
-      id: 0,
-      item: product
-    }
-    return this.http.post<ICartItem>(this.cartUrl, cartItem).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.error(error);
-        return throwError(error);
-      })
-    )
+  addToCart(item: ShoppingItem): number {
+    item.id = this.items.length + 1;
+    return this.items.push(item);
   }
 
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete(this.cartUrl + id);
+  deleteFromCart(id: number): boolean {
+    return delete this.items[id];
   }
 }

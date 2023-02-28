@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IProduct } from '../interfaces/product';
+import { ShoppingItem } from '../data/shopping.item';
 
 @Component({
   selector: 'app-cart',

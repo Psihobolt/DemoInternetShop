@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { IProduct } from '../interfaces/product';
+import { ShoppingItem } from '../data/shopping.item';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, retry, tap } from 'rxjs/operators';
+import { catchError, retry, tap } from 'rxjs/operators';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ProductsService {
   private productUrl = 'https://fakestoreapi.com/products';
 
@@ -17,11 +17,12 @@ export class ProductsService {
     };
   }
 
-  public getProducts(): Observable<IProduct[]>{
-    return this.http.get<IProduct[]>(this.productUrl)
+  public getProducts(): Observable<ShoppingItem[]>{
+    return this.http.get<ShoppingItem[]>(this.productUrl)
     .pipe(
+      retry(2),
       tap(_=>console.log('error with products')),
-      catchError(this.handleError<IProduct[]>('getProducts', []))
+      catchError(this.handleError<ShoppingItem[]>('getProducts', []))
     );
   }
 }
