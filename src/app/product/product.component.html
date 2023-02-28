@@ -39,7 +39,7 @@
                         <span class="fs-5"><b>Price: </b>{{ item.price | currency:'USD':'symbol':'1.2-2' }}</span>
                     </div>
                     <div class="col-4 d-grid d-md-flex justify-content-md-end">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" type="button" (click)="buyItem(item)">
                             <i class="bi bi-bag-fill"></i>
                         </button>
                     </div>
