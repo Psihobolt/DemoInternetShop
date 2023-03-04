@@ -5,16 +5,13 @@
                 <div class="row flex-fill d-flex align-items-center">
                     <div class="col">
                         <div class="p-2">
-                            <img [src]="item.image" class="img-fluid rounded-start" style="min-height: 50px; max-height: 150px;" [alt]="item.title">
+                            <app-image [ngStyle]="styleImg" [sourceImg]="item.image" [title]="item.title"></app-image>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col p-2 text-center">
-                        <span>
-                            <i class="bi bi-star-fill text-warning"></i>
-                            <b>{{ item.rating.rate }}</b> ({{ item.rating.count }})
-                        </span>
+                        <app-rating [rate]="item.rating.rate" [countRate]="item.rating.count"></app-rating>
                     </div>
                 </div>
             </div>
@@ -24,19 +21,17 @@
                 </div>
                 <div class="row p-2">
                     <div class="col">
-                        <p class="fst-italic m-0">Description:</p>
-                        <p class="text-truncate">{{ item.description }}</p>
+                        <app-text-truncate [labelText]="descLabel" [text]="item.description"></app-text-truncate>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col">
-                        <p class="fst-italic m-0">Category:</p>
-                        <p class="text-truncate">{{ item.category }}</p>
+                        <app-text-truncate [labelText]="categoryLabel" [text]="item.category"></app-text-truncate>
                     </div>
                 </div>
                 <div class="row mt-auto p-2">
                     <div class="col-8 d-flex flex-column justify-content-center">
-                        <span class="fs-5"><b>Price: </b>{{ item.price | currency:'USD':'symbol':'1.2-2' }}</span>
+                        <app-price [labelText]="priceLabel" [price]="item.price"></app-price>
                     </div>
                     <div class="col-4 d-grid d-md-flex justify-content-md-end">
                         <button class="btn btn-primary" type="button" (click)="buyItem(item)">

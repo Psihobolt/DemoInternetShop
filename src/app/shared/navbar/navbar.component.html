@@ -17,7 +17,7 @@
                 <a routerLink="/cart" class="p-2 position-relative">
                     <i class="bi bi-bag-fill"></i>
                     <span class="position-absolute top-5 start-100 translate-middle badge rounded-pill bg-danger">
-                      {{ countItems }}
+                      {{ countItems$ | async }}
                     </span>
                 </a>
             </div>

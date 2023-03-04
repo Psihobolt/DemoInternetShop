@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingItem } from '../data/shopping.item';
-import { CartService } from '../services/cart.service';
-import { ProductsService } from '../services/products.service';
+import { ShoppingItem } from '../../data/shopping.item';
+import { CartService } from '../../services/cart.service';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -25,7 +25,7 @@ export class ProductsComponent implements OnInit {
 
   addToCart(item:ShoppingItem){
     if (item){
-      this.cartService.onAddToCart$.next(item);
+      this.cartService.addToCart(item);
     }
   }
 }
