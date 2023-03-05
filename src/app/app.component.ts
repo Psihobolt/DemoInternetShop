@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ShoppingItem } from './data/shopping.item';
+import { ShoppingItem } from './model/shopping.model';
 import { CartService } from './services/cart.service';
 import { Observable, of, Subscription } from 'rxjs';
-import { CartItem } from './data/cart.item';
+import { CartItem } from './model/cart.model';
 
 @Component({
   selector: 'app-root',

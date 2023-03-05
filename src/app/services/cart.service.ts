@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, map, Observable, of} from 'rxjs';
-import { CartItem } from '../data/cart.item';
-import { ShoppingItem } from '../data/shopping.item';
+import { CartItem } from '../model/cart.model';
+import { ShoppingItem } from '../model/shopping.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService implements OnDestroy {

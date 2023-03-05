@@ -10,6 +10,6 @@
         </div>
     </div>
     <ng-container *ngFor="let item of itemsCart; index as i">
-        <app-cart-item [cartItem] = "item" [rowNum] = "i+1" (OnDownCountItemEvent)="downCountItem($event)" (OnUpCountItemEvent)="upCountItem($event)"></app-cart-item>
+        <app-cart-item [cartItem] = "item" [rowNum] = "i+1" (decCountEvent)="downCountItem($event)" (incCountEvent)="upCountItem($event)"></app-cart-item>
     </ng-container>
 </div>

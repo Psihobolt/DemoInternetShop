@@ -1,10 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { ShoppingItem } from '../../data/shopping.item';
+import { ShoppingItem } from '../../model/shopping.model';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
   host: {
     style: "display: contents"
   }
