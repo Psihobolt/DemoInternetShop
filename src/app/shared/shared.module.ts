@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TextTruncateComponent } from './text-truncate/text-truncate.component';
 import { RatingComponent } from './rating/rating.component';
 import { ImageComponent } from './image/image.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ImageComponent } from './image/image.component';
     PriceComponent,
     TextTruncateComponent,
     RatingComponent,
-    ImageComponent
+    ImageComponent,
+    LoadingComponent
   ],
   imports: [CommonModule],
   exports: [
@@ -20,7 +22,8 @@ import { ImageComponent } from './image/image.component';
     PriceComponent,
     TextTruncateComponent,
     RatingComponent,
-    ImageComponent
+    ImageComponent,
+    LoadingComponent
   ]
 })
 export class SharedModule { }
