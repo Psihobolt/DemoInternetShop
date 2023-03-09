@@ -1,0 +1,26 @@
+<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary bg-light">
+    <div class="container-fluid">
+        <div class="navbar-brand">Internet shop</div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarShop" aria-controls="navbarShop" aria-expanded="false" aria-label="Menu shop">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarShop">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" [routerLink]="'/products'" [routerLinkActive]="'active'" [ariaCurrentWhenActive]="'page'">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="'/cart'" [routerLinkActive]="'active'" [ariaCurrentWhenActive]="'page'">Shopping cart</a>
+                </li>
+            </ul>
+            <div class="navbar-text ms-auto me-4 mb-2 mb-lg-0">
+                <a routerLink="/cart" class="p-2 position-relative">
+                    <i class="bi bi-bag-fill"></i>
+                    <span class="position-absolute top-5 start-100 translate-middle badge rounded-pill bg-danger">
+                      {{ countItems$ | async }}
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

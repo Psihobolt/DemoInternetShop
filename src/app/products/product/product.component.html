@@ -1,0 +1,45 @@
+<div class="col-md-4 col-12 p-2" *ngIf="item">
+    <div class="container h-100 border rounded">
+        <div class="row h-100">
+            <div class="col-md-4 col-4 border-end d-flex flex-column align-items-center justify-content-center">
+                <div class="row flex-fill d-flex align-items-center">
+                    <div class="col">
+                        <div class="p-2">
+                            <app-image [ngStyle]="styleImg" [sourceImg]="item.image" [title]="item.title"></app-image>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col p-2 text-center">
+                        <app-rating [rate]="item.rating.rate" [countRate]="item.rating.count"></app-rating>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-8 d-flex flex-column">
+                <div class="row p-2">
+                    <p class="fs-6"><b>{{ item.title }}</b></p>                    
+                </div>
+                <div class="row p-2">
+                    <div class="col">
+                        <app-text-truncate [labelText]="descLabel" [text]="item.description"></app-text-truncate>
+                    </div>
+                </div>
+                <div class="row p-2">
+                    <div class="col">
+                        <app-text-truncate [labelText]="categoryLabel" [text]="item.category"></app-text-truncate>
+                    </div>
+                </div>
+                <div class="row mt-auto p-2">
+                    <div class="col-8 d-flex flex-column justify-content-center">
+                        <app-price [labelText]="priceLabel" [price]="item.price"></app-price>
+                    </div>
+                    <div class="col-4 d-grid d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary" type="button" (click)="buyItem(item)">
+                            <i class="bi bi-bag-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
