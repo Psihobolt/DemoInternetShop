@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "6anfLgIOYKmY0ABG2AQ/PyyWxWAG9M4YTZ5LxqxgSik=",
+  "Source": "DemoInternetShop.ProductsAPI",
+  "BasePath": "_content/DemoInternetShop.ProductsAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

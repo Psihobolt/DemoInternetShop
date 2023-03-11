@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row p-2">
+        <div class="col-10">
+        </div>
+        <div class="col-1 border rounded-start bg-light text-end">
+            <b>Totals:</b>
+        </div>
+        <div class="col-1 border rounded-end bg-light text-end">
+            <b>{{ totalCart | currency:'USD':'symbol':'1.2-2' }}</b>
+        </div>
+    </div>
+    <ng-container *ngFor="let item of itemsCart; index as i">
+        <app-cart-item [cartItem] = "item" [rowNum] = "i+1" (decCountEvent)="downCountItem($event)" (incCountEvent)="upCountItem($event)"></app-cart-item>
+    </ng-container>
+</div>
