@@ -1,10 +1,54 @@
-version: "3.7"
+version: "3.8"
+networks:
+  my-network:
+    driver: bridge
+
 services:
-  dashboard:
-    build: .
+  dis-web:
+    container_name: dis-web
+    depends_on:
+      - "dis-products-api"
+    build: 
+      context: ./web/.
+      dockerfile: Dockerfile
+    volumes:
+      - ./web:/app
+      - "/app/node_modules"
     ports:
       - "4200:4200"
-      - "49153:49153"
+    networks:
+      - my-network
+  
+  dis-products-api:
+    container_name: dis-products-api
+    restart: always
+    build: 
+      context: ./backend/DemoInternetShop.ProductsAPI/.
+      dockerfile: Dockerfile
     volumes:
-      - "/app/node_modules"
-      - ".:/app"
+      - ./backend/DemoInternetShop.ProductsAPI:/app
+      - ./backend/DemoInternetShop.ProductsAPI:/src
+    ports:
+      - "5000:5000"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: 1
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_URLS: "http://+:5000"
+    networks:
+      - my-network
+
+  dis-proxy:
+    container_name: dis-proxy
+    build: 
+      context: ./proxy/.
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - "dis-products-api"
+      - "dis-web"
+    networks:
+      - my-network
+    

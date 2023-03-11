@@ -6,7 +6,7 @@ import { catchError, retry, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
-  private productUrl = 'https://fakestoreapi.com/products';
+  private productUrl = 'http://localhost/api/products';
 
   constructor(private http: HttpClient) { }
   

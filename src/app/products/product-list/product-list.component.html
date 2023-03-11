@@ -1,6 +1,0 @@
-<app-loading></app-loading>
-<div class="row mt-2 g-4">
-    <ng-container *ngFor="let item of items">
-        <app-product [item]="item" (buyItemEvent)="addToCart($event)"></app-product>
-    </ng-container>
-</div>
