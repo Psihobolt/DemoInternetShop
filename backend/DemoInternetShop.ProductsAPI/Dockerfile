@@ -1,17 +1,20 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /vsdbg
-RUN apt-get update \
-&& apt-get install -y --no-install-recommends \
-unzip \
-&& rm -rf /var/lib/apt/lists/* \
-&& curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /vsdbg
+﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-EXPOSE 5000
-
-WORKDIR /src/
-COPY DemoInternetShop.ProductsAPI.csproj ./
-RUN ["dotnet", "restore"]
-
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["DemoInternetShop.ProductsAPI/DemoInternetShop.ProductsAPI.csproj", "DemoInternetShop.ProductsAPI/"]
+RUN dotnet restore "DemoInternetShop.ProductsAPI/DemoInternetShop.ProductsAPI.csproj"
 COPY . .
+WORKDIR "/src/DemoInternetShop.ProductsAPI"
+RUN dotnet build "DemoInternetShop.ProductsAPI.csproj" -c Release -o /app/build
 
-ENTRYPOINT ["dotnet","watch", "run","--no-launch-profile"]
+FROM build AS publish
+RUN dotnet publish "DemoInternetShop.ProductsAPI.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "DemoInternetShop.ProductsAPI.dll"]
