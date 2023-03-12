@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 networks:
   my-network:
     driver: bridge
@@ -18,10 +18,10 @@ services:
       - "4200:4200"
     networks:
       - my-network
+    restart: always
   
   dis-products-api:
     container_name: dis-products-api
-    restart: always
     build: 
       context: ./backend/DemoInternetShop.ProductsAPI/.
       dockerfile: Dockerfile
@@ -29,26 +29,30 @@ services:
       - ./backend/DemoInternetShop.ProductsAPI:/app
       - ./backend/DemoInternetShop.ProductsAPI:/src
     ports:
-      - "5000:5000"
+      - "5050:5050"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: 1
       ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
       ASPNETCORE_ENVIRONMENT: "Development"
-      ASPNETCORE_URLS: "http://+:5000"
+      ASPNETCORE_URLS: "http://0.0.0.0:5050"
     networks:
       - my-network
+    restart: always
 
   dis-proxy:
     container_name: dis-proxy
     build: 
       context: ./proxy/.
       dockerfile: Dockerfile
-    restart: always
     ports:
       - "80:80"
+    links:
+      - dis-products-api:dis-products-api
+      - dis-web:dis-web
     depends_on:
       - "dis-products-api"
       - "dis-web"
     networks:
       - my-network
+    restart: always
     
