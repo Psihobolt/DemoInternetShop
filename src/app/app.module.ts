@@ -10,7 +10,6 @@ import { SharedModule } from './shared/shared.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { appReducers } from './store/app.reducer';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -19,7 +18,7 @@ import { appReducers } from './store/app.reducer';
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument()
   ],
