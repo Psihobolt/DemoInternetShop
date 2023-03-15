@@ -1,4 +1,4 @@
-import { ShoppingItem } from "./shopping.model";
+import { ShoppingItem } from "./shopping-item.model";
 
 export interface CartItem {
     id: number;

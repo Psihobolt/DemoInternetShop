@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ShoppingItem } from './model/shopping.model';
+import { ShoppingItem } from './model/shopping-item.model';
 import { CartService } from './services/cart.service';
 import { Observable, of, Subscription } from 'rxjs';
 import { CartItem } from './model/cart.model';

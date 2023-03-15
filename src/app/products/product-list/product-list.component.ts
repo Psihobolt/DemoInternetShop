@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingService } from 'src/app/services/loading.service';
-import { ShoppingItem } from '../../model/shopping.model';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { AppState } from '../../store/app.state';
+import { ShoppingItem } from '../../model/shopping-item.model';
 import { CartService } from '../../services/cart.service';
-import { ProductsService } from '../../services/products.service';
+import { LoadShoppingItems } from '../state/products.actions';
+import { getProducts } from '../state/products.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -12,18 +16,14 @@ import { ProductsService } from '../../services/products.service';
   }
 })
 export class ProductListComponent implements OnInit {
-  items: ShoppingItem[] = [];
+  items$: Observable<ShoppingItem[]>;
 
-  constructor(private productsService: ProductsService, 
-              private cartService: CartService,
-              private loadingService: LoadingService) {}
+  constructor(private cartService: CartService,
+              private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.loadingService.showLoading();
-    this.productsService.getProducts().subscribe(items => {
-      this.items = items
-      this.loadingService.hideLoading();
-    } )
+    this.store.dispatch(new LoadShoppingItems);
+    this.items$ = this.store.pipe(select(getProducts))
   }
 
   addToCart(item:ShoppingItem){
