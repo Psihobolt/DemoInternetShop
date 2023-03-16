@@ -1,29 +1,14 @@
-import { Action } from "@ngrx/store";
+import { Action, createAction, props } from "@ngrx/store";
 import { CartItem } from "../../model/cart.model";
 
 export enum ECartActions {
     LOAD_CART_ITEMS = '[Cart] Load Cart Items',
     LOAD_CART_ITEMS_SUCCESS = '[Cart] Load Cart Items Success',
-    LOAD_CART_ITEMS_FAIL = '[Cart] Load Cart Items Fail'
+    LOAD_CART_ITEMS_FAIL = '[Cart] Load Cart Items Fail',
+    ADD_ITEM_TO_CART = '[Cart] Add Item To Cart'
 }
 
-export class LoadCart implements Action{
-    readonly type = ECartActions.LOAD_CART_ITEMS;
-}
-
-export class LoadCartSuccess implements Action{
-    readonly type = ECartActions.LOAD_CART_ITEMS_SUCCESS;
-
-    constructor(public payload: CartItem[]){}
-}
-
-export class LoadCartFail implements Action{
-    readonly type = ECartActions.LOAD_CART_ITEMS_FAIL;
-
-    constructor(public payload: string){}
-}
-
-export type Actions 
- = LoadCart 
- | LoadCartSuccess 
- | LoadCartFail;
+export const loadCart = createAction(ECartActions.LOAD_CART_ITEMS, props<{ items: CartItem[] }>());
+export const loadCartSuccess = createAction(ECartActions.LOAD_CART_ITEMS_SUCCESS, props<{ items: CartItem[] }>());
+export const loadCartFail = createAction(ECartActions.LOAD_CART_ITEMS_FAIL, props<Error>);
+export const addToCart = createAction(ECartActions.ADD_ITEM_TO_CART, props<{ item: CartItem }>());

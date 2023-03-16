@@ -1,5 +1,5 @@
 import { CartItem } from "../../model/cart.model";
-import { Loading } from "../..//model/loading.model";
+import { EStatus, Loading } from "../..//model/loading.model";
 
 export interface CartState {
     cartItems: CartItem[];
@@ -9,13 +9,7 @@ export interface CartState {
 export const initialCartState: CartState = {
     cartItems: [],
     loading: {
-        status: {
-            isLoading: false,
-            isLoaded: false,
-            isError: false
-        },
-        error: {
-            message: ''
-        }
+        status: EStatus.none,
+        error: undefined
     }
 }
