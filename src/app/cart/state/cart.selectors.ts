@@ -1,24 +1,27 @@
-import { createSelector } from "@ngrx/store";
-import { AppState } from "../../store/app.state";
-import { CartState } from "./cart.state";
+import { ActionReducerMap, createFeatureSelector, createSelector } from "@ngrx/store";
+import { CartState } from "./cart.entity";
+import * as fromReducer from "./cart.reducer"
 
-const appSelector = (state: AppState) => state.cartItems;
+export interface State {
+    cartState: CartState;
+  }
+   
+  export const reducers: ActionReducerMap<State> = {
+    cartState: fromReducer.cartReducer,
+  };
+
+const appFeature = createFeatureSelector<CartState>();
 export const getCartItems = createSelector(
-    appSelector,
-    (state: CartState) => state.cartItems
+    CartState,
+    fromReducer.selectAllCartItems
 );
 
-export const getCartItemsLoading = createSelector(
-    appSelector,
-    (state: CartState) => state.loading.status.isLoading
-);
-
-export const getCartItemsLoaded = createSelector(
-    appSelector,
-    (state: CartState) => state.loading.status.isLoaded
+export const getCartItemsStatusLoading = createSelector(
+    appFeature,
+    (state: CartState) => state.loading.status
 );
 
 export const getError = createSelector(
-    appSelector,
-    (state: CartState) => state.loading.error.message
+    appFeature,
+    (state: CartState) => state.loading.error
 );
