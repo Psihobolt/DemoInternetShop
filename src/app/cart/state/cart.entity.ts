@@ -1,14 +1,20 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
-import { CartItem } from "../../model/cart.model";
+import { CartItem } from "src/app/model/cart.model";
+import { EStatus, Loading } from "src/app/model/loading.model";
 
-export interface State extends EntityState<CartItem> {
-    selectedCartId: number | null;
-}
- 
-export function selectCartItemId(a: CartItem): number {
-    return a.id;
-}
+export interface CartState extends EntityState<CartItem> {
+    loading: Loading;
+};
 
 export const adapter: EntityAdapter<CartItem> = createEntityAdapter<CartItem>({
-    selectId: selectCartItemId
+    selectId: (state: CartItem) => state.id
+});
+
+export const initialCartState: CartState = adapter.getInitialState({
+    ids: [],
+    entities: {},
+    loading: { 
+        status: EStatus.none,
+        error: undefined
+    }
 });

@@ -1,4 +1,4 @@
-import { Loading } from "../../model/loading.model";
+import { EStatus, Loading } from "../../model/loading.model";
 import { ShoppingItem } from "../../model/shopping-item.model";
 
 export interface ProductsState {
@@ -11,13 +11,7 @@ export const initialProductsState: ProductsState = {
     shoppingItems: [],
     selectedItem: null,
     loading: {
-        status: {
-            isLoading: false,
-            isLoaded: false,
-            isError: false
-        },
-        error: {
-            message: ''
-        }
+        status: EStatus.none,
+        error: undefined
     }
 }

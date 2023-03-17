@@ -1,56 +1,34 @@
-import { Actions, ECartActions } from './cart.actions';
-import { CartState, initialCartState } from './cart.state';
+import { createReducer, on } from '@ngrx/store';
+import { count } from 'rxjs';
+import { EStatus } from '../../model/loading.model';
+import * as CartActions from './cart.actions';
+import { adapter, initialCartState } from './cart.entity';
 
-export const cartReducer = (
-    state = initialCartState,
-    action: Actions
-): CartState => {
-    switch(action.type) {
-        case ECartActions.LOAD_CART_ITEMS:
-            return { 
-                ...state,
-                loading: {
-                    status: {
-                        isLoading: true,
-                        isLoaded: false,
-                        isError:false
-                    },
-                    error: {
-                        message: ''
-                    }
-                }
+export const cartReducer = createReducer(
+    initialCartState,
+    on(CartActions.loadCart, (state)=>{
+        return {
+            ...state,
+            loading:{
+                status: EStatus.isLoading
             }
-        case ECartActions.LOAD_CART_ITEMS_SUCCESS:
-            return { 
-                ...state,
-                cartItems: action.payload,
-                loading: {
-                    status: {
-                        isLoading: false,
-                        isLoaded: true,
-                        isError:false
-                    },
-                    error: {
-                        message: ''
-                    }
-                }
-            }
-        case ECartActions.LOAD_CART_ITEMS_FAIL:
-            return { 
-                ...state,
-                cartItems: [],
-                loading: {
-                    status: {
-                        isLoading: false,
-                        isLoaded: false,
-                        isError:true
-                    },
-                    error: {
-                        message: action.payload
-                    }
-                }
-            }
-        default: 
-            return state;
-    }
-}
+        }
+    }),
+    on(CartActions.loadCartSuccess, (state, action)=>
+        adapter.setAll(action.payload, { ...state, loading: { status:EStatus.isLoaded }})
+    ),
+    on(CartActions.incCartItem, (state, action) => 
+        adapter.updateOne(action.update, state)),
+    on(CartActions.createCartItem, (state, action) => 
+        adapter.addOne(action.payload, state))
+)
+
+const {
+    selectIds,
+    selectEntities,
+    selectAll,
+} = adapter.getSelectors();
+
+export const selectCartItemIds = selectIds;
+export const selectCartEntities = selectEntities;
+export const selectAllCartItems = selectAll;

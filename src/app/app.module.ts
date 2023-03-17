@@ -10,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { cartReducer } from './cart/state/cart.reducer';
+import { CartEffects } from './cart/state/cart.effect';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -18,9 +20,9 @@ import { StoreModule } from '@ngrx/store';
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument()
+    StoreModule.forRoot({ cart: cartReducer }),
+    EffectsModule.forRoot(CartEffects),
+    StoreDevtoolsModule.instrument({autoPause: true, trace:true})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../store/app.state';
 import { CartItem } from '../../model/cart.model';
 import { CartService } from '../../services/cart.service';
-import { LoadCart } from '../state/cart.actions';
+import { loadCart } from '../state/cart.actions';
+import { CartState } from '../state/cart.entity';
 import { getCartItems } from '../state/cart.selectors';
 
 @Component({
@@ -20,11 +20,11 @@ export class CartListComponent implements OnInit {
 
   constructor(
     private cartService:CartService,
-    private store: Store<AppState>
+    private store: Store<CartState>
     ){}
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadCart());
+    this.store.dispatch(loadCart());
     this.itemsCart$ = this.store.pipe(select(getCartItems));
     // this.totalCart = this.itemsCart$
     //     .reduce((total, item)=>total + item.count * item.item.price, 0);

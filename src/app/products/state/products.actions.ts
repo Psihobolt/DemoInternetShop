@@ -23,7 +23,7 @@ export class LoadShoppingItemsSuccess implements Action{
 export class LoadShoppingItemsFail implements Action{
     readonly type = EShoppingItemsActions.LOAD_SHOPPING_ITEMS_FAIL;
 
-    constructor(public payload: string){}
+    constructor(public payload: Error){}
 }
 
 export class LoadShoppingItem implements Action{
@@ -39,7 +39,7 @@ export class LoadShoppingItemSuccess implements Action{
 export class LoadShoppingItemFail implements Action{
     readonly type = EShoppingItemsActions.LOAD_SHOPPING_ITEM_FAIL;
 
-    constructor(public payload: string){}
+    constructor(public payload: Error){}
 }
 
 export type Actions 

@@ -1,3 +1,4 @@
+import { EStatus } from 'src/app/model/loading.model';
 import { Actions, EShoppingItemsActions } from './products.actions';
 import { ProductsState, initialProductsState } from './products.state';
 
@@ -10,14 +11,8 @@ export const productsReducer = (
             return { 
                 ...state,
                 loading: {
-                    status: {
-                        isLoading: true,
-                        isLoaded: false,
-                        isError: false
-                    },
-                    error: {
-                        message: ''
-                    }
+                    status: EStatus.isLoading,
+                    error: undefined
                 }
             }
         case EShoppingItemsActions.LOAD_SHOPPING_ITEMS_SUCCESS:
@@ -26,14 +21,8 @@ export const productsReducer = (
                 shoppingItems: action.payload,
                 selectedItem: null,
                 loading: {
-                    status: {
-                        isLoading: false,
-                        isLoaded: true,
-                        isError: false
-                    },
-                    error: {
-                        message: ''
-                    }
+                    status: EStatus.isLoaded,
+                    error: undefined
                 }
             }
         case EShoppingItemsActions.LOAD_SHOPPING_ITEMS_FAIL:
@@ -42,28 +31,16 @@ export const productsReducer = (
                 shoppingItems: [],
                 selectedItem: null,
                 loading: {
-                    status: {
-                        isLoading: false,
-                        isLoaded: false,
-                        isError: true
-                    },
-                    error: {
-                        message: action.payload
-                    }
+                    status: EStatus.isFail,
+                    error: action.payload
                 }
             }
         case EShoppingItemsActions.LOAD_SHOPPING_ITEM:
             return { 
                 ...state,
                 loading: {
-                    status: {
-                        isLoading: true,
-                        isLoaded: false,
-                        isError: false
-                    },
-                    error: {
-                        message: ''
-                    }
+                    status: EStatus.isLoading,
+                    error: undefined
                 }
             }
         case EShoppingItemsActions.LOAD_SHOPPING_ITEM_SUCCESS:
@@ -72,14 +49,8 @@ export const productsReducer = (
                 shoppingItems: [],
                 selectedItem: action.payload,
                 loading: {
-                    status: {
-                        isLoading: false,
-                        isLoaded: true,
-                        isError: false
-                    },
-                    error: {
-                        message: ''
-                    }
+                    status: EStatus.isLoaded,
+                    error: undefined
                 }
             }
         case EShoppingItemsActions.LOAD_SHOPPING_ITEM_FAIL:
@@ -88,14 +59,8 @@ export const productsReducer = (
                 shoppingItems: [],
                 selectedItem: null,
                 loading: {
-                    status: {
-                        isLoading: false,
-                        isLoaded: false,
-                        isError: true
-                    },
-                    error: {
-                        message: action.payload
-                    }
+                    status: EStatus.isFail,
+                    error: action.payload
                 }
             }
         default: 

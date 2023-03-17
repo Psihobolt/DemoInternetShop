@@ -6,5 +6,5 @@ export enum EStatus {
 }
 export interface Loading{
     status: EStatus;
-    error: Error;
+    error?: Error;
 }
