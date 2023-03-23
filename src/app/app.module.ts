@@ -10,8 +10,9 @@ import { SharedModule } from './shared/shared.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { cartReducer } from './cart/state/cart.reducer';
-import { CartEffects } from './cart/state/cart.effect';
+import { AppReducer, appReducer } from './store/app.reducer';
+import { AppEffects } from './store/app.effects';
+import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -20,8 +21,9 @@ import { CartEffects } from './cart/state/cart.effect';
     SharedModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ cart: cartReducer }),
-    EffectsModule.forRoot(CartEffects),
+    StoreModule.forRoot({reducer: AppReducer}),
+    EffectsModule.forRoot([AppEffects]),
+    StoreRouterConnectingModule.forRoot({ routerState: RouterState.Minimal}),
     StoreDevtoolsModule.instrument({autoPause: true, trace:true})
   ],
   providers: [],

@@ -21,7 +21,6 @@ export class ProductsService {
     return this.http.get<ShoppingItem[]>(this.productUrl)
     .pipe(
       retry(2),
-      tap(_=>console.log('error with products')),
       catchError(this.handleError<ShoppingItem[]>('getProducts', []))
     );
   }

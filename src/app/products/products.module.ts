@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StoreModule } from '@ngrx/store';
+import { provideState, provideStore, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProductRoutingModule } from './products-routing.module';
-import { productsReducer } from './state/products.reducer';
-import { ProductsEffects } from './state/products.effect';
+import { appReducer } from '../store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -19,9 +18,7 @@ import { ProductsEffects } from './state/products.effect';
   imports: [
     CommonModule,
     SharedModule,
-    ProductRoutingModule,
-    StoreModule.forFeature("products", productsReducer),
-    EffectsModule.forFeature([ProductsEffects])
+    ProductRoutingModule
   ]
 })
 export class ProductsModule { }

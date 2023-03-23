@@ -16,7 +16,9 @@ import { LoadingComponent } from './loading/loading.component';
     ImageComponent,
     LoadingComponent
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule
+  ],
   exports: [
     IncButtonComponent,
     PriceComponent,
