@@ -5,20 +5,6 @@ import { initialCartState, CartState } from "./cart.state";
 
 export const _cartReducer = createReducer(
     initialCartState,
-    on(CartListActions.loadCartItems, (state) => ({
-        ...state,
-        list: [],
-        loading: {
-            status: EStatus.isLoading
-        }
-    })),
-    on(CartListActions.loadCartItemsSuccess, (state, { payload }) => ({
-        ...state,
-        list: payload,
-        loading:{
-            status: EStatus.isLoaded
-        }
-    })),
     on(CartListActions.addItemToCartSuccess, (state, { payload }) => ({
         ...state,
         list: [...state.list, { id: payload.id, count: 1, item: payload }],
