@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadCart } from './store/app.actions';
 import { AppState } from './store/app.state';
+import { ProductListActions } from './store/products/products.actions';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,6 @@ export class AppComponent implements OnInit{
   constructor(private store:Store<AppState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadCart());
+    this.store.dispatch(ProductListActions.loadShoppingItems());
   }
 }

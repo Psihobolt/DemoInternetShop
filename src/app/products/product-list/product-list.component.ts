@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { ShoppingItem } from '../../model/shopping-item.model';
 import { AppState } from 'src/app/store/app.state';
-import { addToCart, loadProducts } from 'src/app/store/app.actions';
-import { getAllProducts } from 'src/app/store/app.selectors';
+import { CartListActions } from 'src/app/store/cart/cart.actions';
+import { getAllProducts } from 'src/app/store/products/products.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -20,16 +20,12 @@ export class ProductListComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadProducts());
-    this.store.select(getAllProducts).subscribe(v=>console.log(v));
-    console.log("message after select")
     this.items$ = this.store.select(getAllProducts);
   }
 
   addToCart(item:ShoppingItem){
-    console.log(item)
     if (item){
-      this.store.dispatch(addToCart({ payload: item }));
+      this.store.dispatch(CartListActions.addItemToCart({ payload: item }));
     }
   }
 }
