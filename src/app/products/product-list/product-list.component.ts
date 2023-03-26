@@ -14,14 +14,10 @@ import { getAllProducts } from 'src/app/store/products/products.selectors';
     style: "display: contents"
   }
 })
-export class ProductListComponent implements OnInit {
-  items$: Observable<ShoppingItem[]>;
+export class ProductListComponent {
+  items$: Observable<ShoppingItem[]> = this.store.select(getAllProducts);
 
   constructor(private store: Store<AppState>) {}
-
-  ngOnInit(): void {
-    this.items$ = this.store.select(getAllProducts);
-  }
 
   addToCart(item:ShoppingItem){
     if (item){

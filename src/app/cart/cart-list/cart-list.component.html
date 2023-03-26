@@ -6,7 +6,7 @@
             <b>Totals:</b>
         </div>
         <div class="col-1 border rounded-end bg-light text-end">
-            <b>{{ totalCart | currency:'USD':'symbol':'1.2-2' }}</b>
+            <b>{{ totalCart$ | async | currency:'USD':'symbol':'1.2-2' }}</b>
         </div>
     </div>
     <ng-container *ngFor="let item of (itemsCart$ | async); index as i">

@@ -13,19 +13,13 @@ import { getAllCartItems, getTotalCartItems } from 'src/app/store/cart/cart.sele
     style: "display: contents"
   }
 })
-export class CartListComponent implements OnInit {
-  itemsCart$: Observable<CartItem[]> = of([]);
-  totalCart: number = 0;
+export class CartListComponent {
+  itemsCart$: Observable<CartItem[]> = this.store.select(getAllCartItems);
+  totalCart$: Observable<number> =  this.store.select(getTotalCartItems);
 
   constructor(
     private store: Store<AppState>
     ){}
-
-  ngOnInit(): void {
-    this.itemsCart$ = this.store.select(getAllCartItems);
-    this.store.select(getTotalCartItems)
-      .subscribe(value => this.totalCart = value);
-  }
 
   downCountItem(id:number){
     this.store.dispatch(CartListActions.decCountItemFromCart({ id }));
