@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ShoppingItem } from '../model/shopping.model';
+import { ShoppingItem } from '../model/shopping-item.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, retry, tap } from 'rxjs/operators';
@@ -21,7 +21,6 @@ export class ProductsService {
     return this.http.get<ShoppingItem[]>(this.productUrl)
     .pipe(
       retry(2),
-      tap(_=>console.log('error with products')),
       catchError(this.handleError<ShoppingItem[]>('getProducts', []))
     );
   }

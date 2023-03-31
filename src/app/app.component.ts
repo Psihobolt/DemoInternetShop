@@ -1,15 +1,18 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ShoppingItem } from './model/shopping.model';
-import { CartService } from './services/cart.service';
-import { Observable, of, Subscription } from 'rxjs';
-import { CartItem } from './model/cart.model';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from './store/app.state';
+import { ProductListActions } from './store/products/products.actions';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
   title = 'DemoInternetShop';
   
-  constructor() {}
+  constructor(private store:Store<AppState>) {}
+
+  ngOnInit(): void {
+    this.store.dispatch(ProductListActions.loadShoppingItems());
+  }
 }

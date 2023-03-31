@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { AppState } from '../../store/app.state';
 import { CartItem } from '../../model/cart.model';
-import { CartService } from '../../services/cart.service';
+import { CartListActions } from 'src/app/store/cart/cart.actions';
+import { getAllCartItems, getTotalCartItems } from 'src/app/store/cart/cart.selectors';
 
 @Component({
   selector: 'app-cart-list',
@@ -9,25 +13,19 @@ import { CartService } from '../../services/cart.service';
     style: "display: contents"
   }
 })
-export class CartListComponent implements OnInit {
-  itemsCart:CartItem[] = [];
-  totalCart:number = 0;
+export class CartListComponent {
+  itemsCart$: Observable<CartItem[]> = this.store.select(getAllCartItems);
+  totalCart$: Observable<number> =  this.store.select(getTotalCartItems);
 
-  constructor(private cartService:CartService){}
-
-  ngOnInit(): void {
-    this.cartService.getAllItems().subscribe(items => {
-      this.itemsCart = items;
-      this.totalCart = this.itemsCart
-        .reduce((total, item)=>total + item.count * item.item.price, 0);
-    } );
-  }
+  constructor(
+    private store: Store<AppState>
+    ){}
 
   downCountItem(id:number){
-    this.cartService.downCountCartItem(id);
+    this.store.dispatch(CartListActions.decCountItemFromCart({ id }));
   }
 
   upCountItem(id:number){
-    this.cartService.upCountCartItem(id);
+    this.store.dispatch(CartListActions.incCountItemFromCart({ id }));
   }
 }

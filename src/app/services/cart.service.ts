@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, map, Observable, of} from 'rxjs';
 import { CartItem } from '../model/cart.model';
-import { ShoppingItem } from '../model/shopping.model';
+import { ShoppingItem } from '../model/shopping-item.model';
 
 @Injectable({ providedIn: 'root' })
 export class CartService implements OnDestroy {
@@ -56,7 +56,7 @@ export class CartService implements OnDestroy {
   }
 
   downCountCartItem(id:number){
-    var item = this.itemsCart.find(x=>x.id == id);
+    var item = this.itemsCart.find(x=>x.item.id == id);
     if (item){
       item.count--;
       if (item.count <= 0){
@@ -68,7 +68,7 @@ export class CartService implements OnDestroy {
   }
 
   upCountCartItem(id:number){
-    var item = this.itemsCart.find(x=>x.id == id);
+    var item = this.itemsCart.find(x=>x.item.id == id);
     if (item) {
       item.count++;
       this.resetValues();

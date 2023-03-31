@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingService } from 'src/app/services/loading.service';
-import { ShoppingItem } from '../../model/shopping.model';
-import { CartService } from '../../services/cart.service';
-import { ProductsService } from '../../services/products.service';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { ShoppingItem } from '../../model/shopping-item.model';
+import { AppState } from 'src/app/store/app.state';
+import { CartListActions } from 'src/app/store/cart/cart.actions';
+import { getAllProducts } from 'src/app/store/products/products.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -11,24 +14,14 @@ import { ProductsService } from '../../services/products.service';
     style: "display: contents"
   }
 })
-export class ProductListComponent implements OnInit {
-  items: ShoppingItem[] = [];
+export class ProductListComponent {
+  items$: Observable<ShoppingItem[]> = this.store.select(getAllProducts);
 
-  constructor(private productsService: ProductsService, 
-              private cartService: CartService,
-              private loadingService: LoadingService) {}
-
-  ngOnInit(): void {
-    this.loadingService.showLoading();
-    this.productsService.getProducts().subscribe(items => {
-      this.items = items
-      this.loadingService.hideLoading();
-    } )
-  }
+  constructor(private store: Store<AppState>) {}
 
   addToCart(item:ShoppingItem){
     if (item){
-      this.cartService.addToCart(item);
+      this.store.dispatch(CartListActions.addItemToCart({ payload: item }));
     }
   }
 }

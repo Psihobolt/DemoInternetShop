@@ -6,7 +6,6 @@ import { CartItemComponent } from './cart-item/cart-item.component';
 import { CartRoutingModule } from './cart-routing.module';
 
 
-
 @NgModule({
   declarations: [
     CartListComponent,
